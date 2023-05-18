@@ -4,23 +4,26 @@ module Sydecar
   class Connection
     class << self
       attr_accessor :token
-      def instance
 
+      def headers
+        {
+          'Authorization' => "Bearer #{token}",
+          'User-Agent' => 'Faraday',
+          'Connection' => 'keep-alive',
+          'Content-Type' => 'application/json',
+          'Accept' => 'application/json',
+        }
+      end
+      def instance
         unless token
           raise TokenNotSetError
         end
 
-        return instance if instance
+        return @@instance if @@instance
 
         @@instance = Faraday.new(
           url: BASE_URL,
-          headers: {
-            'Authorization' => "Bearer #{token}",
-            'User-Agent' => 'Faraday',
-            'Connection' => 'keep-alive',
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-          }
+          headers: headers
         ) do |f|
           f.request :json
           f.response :json
