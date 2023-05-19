@@ -3,8 +3,8 @@ require 'sydecar/connection'
 
 module Sydecar
   class Person
-    PERSON_URL = '/v1/persons/'.freeze
-    CREATE_URL = "#{PERSON_URL}create".freeze
+    URL = '/v1/persons/'.freeze
+    CREATE_URL = "#{URL}create".freeze
     class << self
       # @param [Hash] body
       def create(body:)
@@ -13,13 +13,13 @@ module Sydecar
 
       # @param [integer] id
       def find(id:)
-        Connection.instance.get("#{PERSON_URL}#{id}", { reveal_pii: true })
+        Connection.instance.get("#{URL}#{id}", { reveal_pii: true })
       end
 
       # @param [Integer] id
       # @param [Hash] body
       def update(id:, body:)
-        Connection.instance.patch("#{PERSON_URL}#{id}", body)
+        Connection.instance.patch("#{URL}#{id}", body)
       end
 
       # @param [Hash] params argument expects to have the following keys
@@ -32,12 +32,12 @@ module Sydecar
       def find_all(params: {}, body: {})
         query = '?'
         query += URI.encode_www_form(params)
-        Connection.instance.post("#{PERSON_URL}#{query}", body)
+        Connection.instance.post("#{URL}#{query}", body)
       end
 
       # @param [Integer] id
       def kyc(id:)
-        Connection.instance.post("#{PERSON_URL}#{id}/kyc")
+        Connection.instance.post("#{URL}#{id}/kyc")
       end
     end
   end

@@ -5,5 +5,7 @@ module Sydecar
 
   class Profile
 
+    class << self
+    end
   end
 end
