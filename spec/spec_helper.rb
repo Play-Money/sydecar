@@ -5,10 +5,6 @@ require 'webmock/rspec'
 require 'awesome_print'
 
 require "sydecar"
-require "sydecar/version"
-require "sydecar/constants"
-require "sydecar/connection"
-require "sydecar/person"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

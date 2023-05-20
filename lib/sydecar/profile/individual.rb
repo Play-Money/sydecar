@@ -4,7 +4,7 @@ require 'sydecar/connection'
 module Sydecar
   class Profile
     class Individual
-      URL = '/v1/profiles/individual'
+      URL = '/v1/profiles/individual'.freeze
 
       class << self
         # @param [Hash] body

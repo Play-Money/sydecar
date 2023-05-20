@@ -43,10 +43,10 @@ RSpec.describe Sydecar::Person do
     url = "#{Sydecar::BASE_URL}#{Sydecar::Person::URL}#{query}"
 
     stub_request(:post, url)
-      .with(headers: headers)
+      .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
 
-    subject.class.find_all(params: params)
+    subject.class.find_all(params: params, body: body)
   end
 
   it 'calls kyc for a person' do

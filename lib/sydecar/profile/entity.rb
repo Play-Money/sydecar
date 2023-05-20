@@ -4,7 +4,7 @@ require 'sydecar/connection'
 module Sydecar
   class Profile
     class Entity
-      URL = '/v1/profiles/entity'
+      URL = '/v1/profiles/entity'.freeze
 
       class << self
         # @param [Hash] body

@@ -28,7 +28,7 @@ module Sydecar
       # [Integer] offset
       # [String] start_date (format: yyyy-mm-dd)
       # [String] end_date (format: yyyy-mm-dd)
-      # @param [Hash] body expects to have "ids" key
+      # @param [Hash] body: expects to have "ids" key
       def find_all(params: {}, body: {})
         query = '?'
         query += URI.encode_www_form(params)
@@ -39,6 +39,8 @@ module Sydecar
       def kyc(id:)
         Connection.instance.post("#{URL}#{id}/kyc")
       end
+
+      # TODO: implement "Upload documents for KYC" endpoint
     end
   end
 end
