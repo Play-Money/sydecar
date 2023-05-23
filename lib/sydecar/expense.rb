@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 module Sydecar
-  class Vendor
-    URL = '/v1/vendors'
+  class Expense
+    URL = '/v1/expenses'
     CREATE_URL = "#{URL}/create"
 
     class << self
-      # @param [Hash] body
       def create(body:)
         Connection.instance.post(CREATE_URL, body)
       end
@@ -33,6 +32,29 @@ module Sydecar
         query = '?'
         query += URI.encode_www_form(params)
         Connection.instance.post("#{URL}#{query}", body)
+      end
+
+      # @param [integer] id
+      def delete(id:)
+        Connection.instance.delete("#{URL}/#{id}")
+      end
+
+      def pay_url(id:)
+        "/v1/expenses/#{id}/pay"
+      end
+
+      def pay(id:)
+        url = pay_url(id: id)
+        Connection.instance.post(url)
+      end
+
+      def cancel_url(id:)
+        "/v1/expenses/#{id}/cancel"
+      end
+
+      def cancel(id:)
+        url = cancel_url(id: id)
+        Connection.instance.post(url)
       end
     end
   end
