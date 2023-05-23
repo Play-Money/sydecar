@@ -1,5 +1,3 @@
-require 'faraday'
-
 module Sydecar
   class Connection
     class << self

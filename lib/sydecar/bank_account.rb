@@ -1,10 +1,9 @@
-require 'uri'
-require 'sydecar/connection'
+# frozen_string_literal: true
 
 module Sydecar
   class BankAccount
-    URL = '/v1/bank_accounts'.freeze
-    CREATE_URL = "#{URL}create".freeze
+    URL = '/v1/bank_accounts'
+    CREATE_URL = "#{URL}create"
     class << self
       # @param [Hash] body
       def create(body:)

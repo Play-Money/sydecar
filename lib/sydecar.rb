@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'faraday'
+require 'uri'
+
 require_relative "sydecar/version"
 require_relative "sydecar/constants"
 require_relative "sydecar/connection"

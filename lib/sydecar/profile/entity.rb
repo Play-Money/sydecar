@@ -1,10 +1,9 @@
 # frozen_string_literal: true
-require 'sydecar/connection'
 
 module Sydecar
   class Profile
     class Entity
-      URL = '/v1/profiles/entity'.freeze
+      URL = '/v1/profiles/entity'
 
       class << self
         # @param [Hash] body

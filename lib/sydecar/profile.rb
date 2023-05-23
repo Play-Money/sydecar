@@ -1,11 +1,9 @@
 # frozen_string_literal: true
-require 'sydecar/connection'
 
 module Sydecar
-
   class Profile
-    URL = '/v1/profiles/'.freeze
-    ACCREDITATION_QUALIFICATION_URL = "#{URL}accreditation_qualification_options".freeze
+    URL = '/v1/profiles/'
+    ACCREDITATION_QUALIFICATION_URL = "#{URL}accreditation_qualification_options"
     class << self
       def find(id:)
         url = "#{URL}#{id}"

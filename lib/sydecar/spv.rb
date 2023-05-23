@@ -1,5 +1,4 @@
-require 'uri'
-require 'sydecar/connection'
+# frozen_string_literal: true
 
 module Sydecar
   class Spv

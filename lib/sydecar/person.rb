@@ -1,10 +1,9 @@
-require 'uri'
-require 'sydecar/connection'
+# frozen_string_literal: true
 
 module Sydecar
   class Person
-    URL = '/v1/persons/'.freeze
-    CREATE_URL = "#{URL}create".freeze
+    URL = '/v1/persons/'
+    CREATE_URL = "#{URL}create"
     class << self
       # @param [Hash] body
       def create(body:)
