@@ -3,13 +3,12 @@ require 'spec_helper'
 
 RSpec.describe Sydecar::Profile do
 
-  before { Sydecar::Connection.token = 'secret-token' }
   let!(:headers) { Sydecar::Connection.headers }
   let!(:body) { {}.to_json }
   let(:id) { 1 }
 
   it 'calls find' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Profile::URL}#{id}?reveal_pii=true&include=subscriptions,spvs"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Profile::URL}/#{id}?reveal_pii=true&include=subscriptions,spvs"
     stub_request(:get, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -18,7 +17,7 @@ RSpec.describe Sydecar::Profile do
   end
 
   it 'calls activate_spv' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Profile.activate_spv_url(id: id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Profile.activate_spv_url(id: id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -27,7 +26,7 @@ RSpec.describe Sydecar::Profile do
   end
 
   it 'calls deactivate_spv' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Profile.deactivate_spv_url(id: id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Profile.deactivate_spv_url(id: id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -41,7 +40,7 @@ RSpec.describe Sydecar::Profile do
     }
     query = '?'
     query += URI.encode_www_form(params)
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Profile::URL}#{query}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Profile::URL}#{query}"
 
     stub_request(:post, url)
       .with(body: body, headers: headers)
@@ -51,7 +50,7 @@ RSpec.describe Sydecar::Profile do
   end
 
   it 'calls accreditation_qualification_opts' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Profile::ACCREDITATION_QUALIFICATION_URL}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Profile::ACCREDITATION_QUALIFICATION_URL}"
 
     stub_request(:post, url)
       .with(body: { sub_type: 'PERSON', entity_type: 'SOLE_PROPRIETOR' }, headers: headers)

@@ -16,5 +16,6 @@ require_relative "sydecar/spv"
 
 module Sydecar
   class TokenNotSetError < StandardError; end
+  class BaseUrlNotSetError < StandardError; end
   # Your code goes here...
 end

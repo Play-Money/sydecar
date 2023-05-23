@@ -3,13 +3,12 @@ require 'spec_helper'
 
 RSpec.describe Sydecar::Person do
 
-  before { Sydecar::Connection.token = 'secret-token' }
   let!(:headers) { Sydecar::Connection.headers }
   let!(:body) { {}.to_json }
   let(:person_id) { 1 }
 
   it 'calls create' do
-    stub_request(:post, "#{Sydecar::BASE_URL}#{Sydecar::Person::CREATE_URL}")
+    stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::Person::CREATE_URL}")
       .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
 
@@ -17,7 +16,7 @@ RSpec.describe Sydecar::Person do
   end
 
   it 'calls find' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Person::URL}#{person_id}?reveal_pii=true"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Person::URL}/#{person_id}?reveal_pii=true"
     stub_request(:get, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -26,7 +25,7 @@ RSpec.describe Sydecar::Person do
   end
 
   it 'calls update' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Person::URL}#{person_id}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Person::URL}/#{person_id}"
     stub_request(:patch, url)
       .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
@@ -40,7 +39,7 @@ RSpec.describe Sydecar::Person do
     }
     query = '?'
     query += URI.encode_www_form(params)
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Person::URL}#{query}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Person::URL}#{query}"
 
     stub_request(:post, url)
       .with(body: body, headers: headers)
@@ -50,7 +49,7 @@ RSpec.describe Sydecar::Person do
   end
 
   it 'calls kyc for a person' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Person::URL}#{person_id}/kyc"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Person::URL}/#{person_id}/kyc"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)

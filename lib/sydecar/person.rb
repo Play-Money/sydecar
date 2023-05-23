@@ -2,8 +2,8 @@
 
 module Sydecar
   class Person
-    URL = '/v1/persons/'
-    CREATE_URL = "#{URL}create"
+    URL = '/v1/persons'
+    CREATE_URL = "#{URL}/create"
     class << self
       # @param [Hash] body
       def create(body:)
@@ -12,13 +12,13 @@ module Sydecar
 
       # @param [integer] id
       def find(id:)
-        Connection.instance.get("#{URL}#{id}", { reveal_pii: true })
+        Connection.instance.get("#{URL}/#{id}", { reveal_pii: true })
       end
 
       # @param [Integer] id
       # @param [Hash] body
       def update(id:, body:)
-        Connection.instance.patch("#{URL}#{id}", body)
+        Connection.instance.patch("#{URL}/#{id}", body)
       end
 
       # @param [Hash] params argument expects to have the following keys
@@ -36,7 +36,7 @@ module Sydecar
 
       # @param [Integer] id
       def kyc(id:)
-        Connection.instance.post("#{URL}#{id}/kyc")
+        Connection.instance.post("#{URL}/#{id}/kyc")
       end
 
       # TODO: implement "Upload documents for KYC" endpoint

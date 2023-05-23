@@ -1,7 +1,7 @@
 module Sydecar
   class Connection
     class << self
-      attr_accessor :token
+      attr_accessor :token, :base_url
 
       def headers
         {
@@ -17,10 +17,14 @@ module Sydecar
           raise TokenNotSetError
         end
 
+        unless base_url
+          raise BaseUrlNotSetError
+        end
+
         return @@instance if @@instance
 
         @@instance = Faraday.new(
-          url: BASE_URL,
+          url: base_url,
           headers: headers
         ) do |f|
           f.request :json

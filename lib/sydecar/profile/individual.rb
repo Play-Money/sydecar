@@ -3,7 +3,7 @@
 module Sydecar
   class Profile
     class Individual
-      URL = '/v1/profiles/individual'.freeze
+      URL = '/v1/profiles/individual'
 
       class << self
         # @param [Hash] body

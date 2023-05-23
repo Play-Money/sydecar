@@ -3,13 +3,12 @@ require 'spec_helper'
 
 RSpec.describe Sydecar::Spv do
 
-  before { Sydecar::Connection.token = 'secret-token' }
   let!(:headers) { Sydecar::Connection.headers }
   let!(:body) { {}.to_json }
   let(:spv_id) { 1 }
 
   it 'calls create' do
-    stub_request(:post, "#{Sydecar::BASE_URL}#{Sydecar::Spv::CREATE_URL}")
+    stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::Spv::CREATE_URL}")
       .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
 
@@ -17,7 +16,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls find' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv::URL}#{spv_id}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv::URL}/#{spv_id}"
     stub_request(:get, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -26,7 +25,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls update' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv::URL}#{spv_id}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv::URL}/#{spv_id}"
     stub_request(:patch, url)
       .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
@@ -40,7 +39,7 @@ RSpec.describe Sydecar::Spv do
     }
     query = '?'
     query += URI.encode_www_form(params)
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv::URL}#{query}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv::URL}#{query}"
 
     stub_request(:post, url)
       .with(body: body, headers: headers)
@@ -50,7 +49,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls initiate_close' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv.initiate_close_url(id: spv_id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv.initiate_close_url(id: spv_id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -59,7 +58,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls disburse_close' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv.disburse_close_url(id: spv_id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv.disburse_close_url(id: spv_id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -68,7 +67,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls counter_sign_close' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv.counter_sign_close_url(id: spv_id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv.counter_sign_close_url(id: spv_id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -77,7 +76,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls request_approval' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv.request_approval_url(id: spv_id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv.request_approval_url(id: spv_id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -86,7 +85,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls request_bank_account' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv.request_bank_account_url(id: spv_id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv.request_bank_account_url(id: spv_id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -95,7 +94,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls disbursements' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv.disbursements_url(id: spv_id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv.disbursements_url(id: spv_id)}"
     stub_request(:get, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -104,7 +103,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls adjust_disbursements' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv.adjust_disbursements_url(id: spv_id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv.adjust_disbursements_url(id: spv_id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
@@ -113,7 +112,7 @@ RSpec.describe Sydecar::Spv do
   end
 
   it 'calls adjust_fund_deal_investments' do
-    url = "#{Sydecar::BASE_URL}#{Sydecar::Spv.adjust_fund_deal_investments_url(id: spv_id)}"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv.adjust_fund_deal_investments_url(id: spv_id)}"
     stub_request(:post, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)

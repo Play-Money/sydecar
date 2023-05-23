@@ -2,8 +2,8 @@
 
 module Sydecar
   class Spv
-    URL = '/v1/spvs/'.freeze
-    CREATE_URL = "#{URL}create".freeze
+    URL = '/v1/spvs'
+    CREATE_URL = "#{URL}/create"
     class << self
       # @param [Hash] body
       def create(body:)
@@ -12,13 +12,13 @@ module Sydecar
 
       # @param [integer] id
       def find(id:)
-        Connection.instance.get("#{URL}#{id}")
+        Connection.instance.get("#{URL}/#{id}")
       end
 
       # @param [Integer] id
       # @param [Hash] body
       def update(id:, body:)
-        Connection.instance.patch("#{URL}#{id}", body)
+        Connection.instance.patch("#{URL}/#{id}", body)
       end
 
       # @param [Hash] params argument expects to have the following keys

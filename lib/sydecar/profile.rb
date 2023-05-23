@@ -2,11 +2,11 @@
 
 module Sydecar
   class Profile
-    URL = '/v1/profiles/'
-    ACCREDITATION_QUALIFICATION_URL = "#{URL}accreditation_qualification_options"
+    URL = '/v1/profiles'
+    ACCREDITATION_QUALIFICATION_URL = "#{URL}/accreditation_qualification_options"
     class << self
       def find(id:)
-        url = "#{URL}#{id}"
+        url = "#{URL}/#{id}"
         Connection.instance.get(url, { reveal_pii: true, include: 'subscriptions,spvs' })
       end
 

@@ -14,14 +14,19 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-### As of the time of this writing, the following enpoints are covered:
+### Supported endpoints:
 1. Person: create, find, update, find_all, kyc
 2. Entity: create, find, update, find_all
 3. Bank Account: create, find, update, find_all, delete
-4. SPV: create, find, update, find_all
+4. SPV: all
 5. Vendor: create, find, update, find_all
-6. Expense: create, find, update, find_all, delete
-7. Subscription: create, find, update, find_all
+6. Expense: create, find, update, find_all, delete, pay, cancel
+7. Subscription: all
+
+### Example usage:
+* Finding a Person: `Sydecar::Person.find(id: person_id)`
+* Creating a Bank Account: `Sydecar::BankAccount.create(body: body)`
+* Updating an entity: `Sydecar::Entity.update(id: entity_id, body: {})`
 
 ## Development
 

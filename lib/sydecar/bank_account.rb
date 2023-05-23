@@ -3,7 +3,7 @@
 module Sydecar
   class BankAccount
     URL = '/v1/bank_accounts'
-    CREATE_URL = "#{URL}create"
+    CREATE_URL = "#{URL}/create"
     class << self
       # @param [Hash] body
       def create(body:)
@@ -12,13 +12,13 @@ module Sydecar
 
       # @param [integer] id
       def find(id:)
-        Connection.instance.get("#{URL}#{id}", { reveal_pii: true, include: 'spvs' })
+        Connection.instance.get("#{URL}/#{id}", { reveal_pii: true, include: 'spvs' })
       end
 
       # @param [Integer] id
       # @param [Hash] body
       def update(id:, body:)
-        Connection.instance.patch("#{URL}#{id}", body)
+        Connection.instance.patch("#{URL}/#{id}", body)
       end
 
       # @param [Hash] params argument expects to have the following keys
@@ -36,7 +36,7 @@ module Sydecar
 
       # @param [integer] id
       def delete(id:)
-        Connection.instance.delete("#{URL}#{id}")
+        Connection.instance.delete("#{URL}/#{id}")
       end
     end
   end

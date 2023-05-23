@@ -16,4 +16,9 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.before(:each) do
+    Sydecar::Connection.token = 'secret-token'
+    Sydecar::Connection.base_url = 'https://secret.sydecar.api.io'
+  end
 end
