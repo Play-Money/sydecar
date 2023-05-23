@@ -11,11 +11,6 @@ RSpec.describe Sydecar::Profile::Entity do
       .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
 
-    # TODO: discuss if this a good idea to use this kind of checks
-    # cons: in this case the test knows too much about the internal implementation which is a bad practice
-    # pros: we are able to control that endpoint is still triggered
-    # expect(Sydecar::Connection.instance).to receive(:post).with("#{Sydecar::Profile::URL}", body)
-
     subject.class.create(body: body)
   end
 
