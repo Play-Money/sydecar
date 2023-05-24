@@ -22,6 +22,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
 5. Vendor: create, find, update, find_all
 6. Expense: create, find, update, find_all, delete, pay, cancel
 7. Subscription: all
+8. Documents: all
 
 ### Example usage:
 * Finding a Person: `Sydecar::Person.find(id: person_id)`
