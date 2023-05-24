@@ -11,12 +11,12 @@ module Sydecar
         Connection.instance.post(CREATE_URL, body)
       end
 
-      # @param [integer] id
+      # @param [UUID] id
       def find(id:)
         Connection.instance.get("#{URL}/#{id}", { reveal_pii: true })
       end
 
-      # @param [Integer] id
+      # @param [UUID] id
       # @param [Hash] body
       def update(id:, body:)
         Connection.instance.patch("#{URL}/#{id}", body)

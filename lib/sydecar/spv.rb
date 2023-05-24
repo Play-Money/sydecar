@@ -10,12 +10,12 @@ module Sydecar
         Connection.instance.post(CREATE_URL, body)
       end
 
-      # @param [integer] id
+      # @param [UUID] id
       def find(id:)
         Connection.instance.get("#{URL}/#{id}")
       end
 
-      # @param [Integer] id
+      # @param [UUID] id
       # @param [Hash] body
       def update(id:, body:)
         Connection.instance.patch("#{URL}/#{id}", body)
@@ -34,10 +34,13 @@ module Sydecar
         Connection.instance.post("#{URL}#{query}", body)
       end
 
+      # @param [UUID] id
       def initiate_close_url(id:)
         "/v1/spvs/#{id}/close/initiate"
       end
 
+      # @param [UUID] id
+      # @param [UUID] idempotency_key
       def initiate_close(id:, idempotency_key:)
         url = initiate_close_url(id: id)
         Connection.instance.post(url, nil, { 'idempotency-key': idempotency_key })

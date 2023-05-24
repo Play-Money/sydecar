@@ -10,24 +10,24 @@ module Sydecar
         Connection.instance.get(url, { reveal_pii: true, include: 'subscriptions,spvs' })
       end
 
-      # @param [Integer] id. Warning: this must be PROFILE_ID. Not SPV ID
+      # @param [UUID] id. Warning: this must be PROFILE_ID. Not SPV ID
       def activate_spv_url(id:)
         "/v1/profiles/#{id}/activate"
       end
 
       # TODO: check with Sydecar why this is called "activate SPV" whereas a PROFILE_ID is passed
-      # @param [Integer] id. Warning: this must be PROFILE_ID. Not SPV ID
+      # @param [UUID] id. Warning: this must be PROFILE_ID. Not SPV ID
       def activate_spv(id:)
         Connection.instance.post(activate_spv_url(id: id))
       end
 
-      # @param [Integer] id. Warning: this must be PROFILE_ID. Not SPV ID
+      # @param [UUID] id. Warning: this must be PROFILE_ID. Not SPV ID
       def deactivate_spv_url(id:)
         "/v1/profiles/#{id}/deactivate"
       end
 
       # TODO: check with Sydecar why this is called "deactivate SPV" whereas a PROFILE_ID is passed
-      # @param [Integer] id. Warning: this must be PROFILE_ID. Not SPV ID
+      # @param [UUID] id. Warning: this must be PROFILE_ID. Not SPV ID
       def deactivate_spv(id:)
         Connection.instance.post(deactivate_spv_url(id: id))
       end
