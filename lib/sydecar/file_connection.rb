@@ -1,8 +1,11 @@
 module Sydecar
-  class Connection < BaseConnection
+  class FileConnection < BaseConnection
     class << self
       def headers
-        common_headers.merge('Content-Type' => 'application/json')
+        common_headers.merge(
+          'Content-Type' => 'multipart/form-data',
+          'Accept' => '*/*'
+        )
       end
 
       def instance
@@ -14,7 +17,7 @@ module Sydecar
           url: base_url,
           headers: headers
         ) do |f|
-          f.request :json
+          f.request :multipart
           f.response :json
           if ENV['RAILS_ENV'] == 'development' || !ENV['RAILS_ENV']
             f.response :logger,

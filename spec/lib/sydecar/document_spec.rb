@@ -3,6 +3,7 @@ require 'spec_helper'
 
 RSpec.describe Sydecar::Document do
   let!(:headers) { Sydecar::Connection.headers }
+  let!(:upload_headers) { Sydecar::FileConnection.headers }
   let!(:body) { {}.to_json }
   let(:id) { 1 }
 
@@ -67,5 +68,19 @@ RSpec.describe Sydecar::Document do
       .to_return(body: body, status: 200)
 
     subject.class.download(id: id)
+  end
+
+  # TODO: WebMock does not support matching body for multipart/form-data requests yet.
+  # So we need to look for a workaround on that
+  xit 'uploads a doc' do
+    Sydecar::FileConnection.token = 'secret-token'
+    Sydecar::FileConnection.base_url = 'https://secret.sydecar.api.io'
+
+    url = "#{Sydecar::FileConnection.base_url}#{Sydecar::Document::UPLOAD_URL}"
+    stub_request(:post, url)
+      .with(body: body, headers: upload_headers)
+      .to_return(body: body, status: 200)
+
+    subject.class.upload(body: {}, idempotency_key: 'unique')
   end
 end

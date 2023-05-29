@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
+# TODO: find a way to load all dependencies automatically for any ENV
 require 'faraday'
+require 'active_support'
+require 'faraday/multipart'
+require 'faraday/logging/color_formatter'
 require 'uri'
 
 require_relative "sydecar/version"
 require_relative "sydecar/constants"
+require_relative "sydecar/base_connection"
 require_relative "sydecar/connection"
+require_relative "sydecar/file_connection"
 require_relative "sydecar/person"
 require_relative "sydecar/profile"
 require_relative "sydecar/profile/entity"

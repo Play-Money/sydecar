@@ -75,6 +75,10 @@ module Sydecar
         url = download_url(id: id)
         Connection.instance.get(url)
       end
+
+      def upload(body:, idempotency_key:)
+        FileConnection.instance.post(UPLOAD_URL, body, { 'idempotency-key': idempotency_key })
+      end
     end
   end
 end
