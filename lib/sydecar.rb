@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-# TODO: find a way to load all dependencies automatically for any ENV
-require 'faraday'
-require 'active_support'
-require 'faraday/multipart'
-require 'faraday/logging/color_formatter'
+require 'bundler/setup'
+Bundler.require(:default)
 require 'uri'
 
 require_relative "sydecar/version"
