@@ -37,9 +37,11 @@ Gem::Specification.new do |spec|
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 
-  spec.add_development_dependency 'webmock'
-  spec.add_development_dependency 'faraday-logging-color_formatter'
+  spec.add_development_dependency 'webmock', '~> 3.18'
+  spec.add_development_dependency 'activesupport', '~> 7.0'
+  spec.add_development_dependency 'faraday-logging-color_formatter', '~> 0.2.0'
 
-  spec.add_dependency 'faraday'
-  spec.add_dependency 'json'
+  spec.add_dependency 'faraday', '~> 2.7'
+  spec.add_dependency 'json', '~> 2.6'
+  spec.add_dependency 'faraday-multipart', '~> 1.0'
 end

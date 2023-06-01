@@ -8,7 +8,7 @@ module Sydecar
     class << self
       # @param [UUID] id
       def find(id:)
-        Connection.instance.get("#{URL}/#{id}", { include: 'fund' })
+        Connection.instance.get("#{URL}/#{id}")
       end
       # @param [UUID] id
       def delete(id:)
@@ -74,6 +74,10 @@ module Sydecar
       def download(id:)
         url = download_url(id: id)
         Connection.instance.get(url)
+      end
+
+      def upload(body:, idempotency_key:)
+        FileConnection.instance.post(UPLOAD_URL, body, { 'idempotency-key': idempotency_key })
       end
     end
   end

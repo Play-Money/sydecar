@@ -24,6 +24,15 @@ RSpec.describe Sydecar::Spv do
     subject.class.find(id: spv_id)
   end
 
+  it 'calls find including profile and subscription' do
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv::URL}/#{spv_id}?include=profile,subscriptions"
+    stub_request(:get, url)
+      .with(headers: headers)
+      .to_return(body: body, status: 200)
+
+    subject.class.find(id: spv_id, profile: true, subscriptions: true)
+  end
+
   it 'calls update' do
     url = "#{Sydecar::Connection.base_url}#{Sydecar::Spv::URL}/#{spv_id}"
     stub_request(:patch, url)

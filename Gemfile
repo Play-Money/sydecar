@@ -9,6 +9,6 @@ gem "rake", "~> 13.0"
 
 group :development do
   gem 'rspec', '~> 3.0'
-  gem 'byebug'
-  gem 'awesome_print'
+  gem 'byebug', '~> 11.1'
+  gem 'awesome_print', '~> 1.9'
 end
