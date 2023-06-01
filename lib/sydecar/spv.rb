@@ -11,8 +11,37 @@ module Sydecar
       end
 
       # @param [UUID] id
-      def find(id:)
-        Connection.instance.get("#{URL}/#{id}")
+      # @param [Boolean] bank_accounts
+      # @param [Boolean] capital_call_events
+      # @param [Boolean] dates
+      # @param [Boolean] docset
+      # @param [Boolean] documents
+      # @param [Boolean] expenses
+      # @param [Boolean] profile
+      # @param [Boolean] subscriptions
+      def find(
+        id:,
+        bank_accounts: false,
+        capital_call_events: false,
+        dates: false,
+        docset: false,
+        documents: false,
+        expenses: false,
+        profile: false,
+        subscriptions: false
+      )
+        query = compile_find_params(
+          bank_accounts: bank_accounts,
+          capital_call_events: capital_call_events,
+          dates: dates,
+          docset: docset,
+          documents: documents,
+          expenses: expenses,
+          profile: profile,
+          subscriptions: subscriptions
+        )
+
+        Connection.instance.get("#{URL}/#{id}", query)
       end
 
       # @param [UUID] id
@@ -107,6 +136,32 @@ module Sydecar
       def adjust_fund_deal_investments(id:)
         url = adjust_fund_deal_investments_url(id: id)
         Connection.instance.post(url)
+      end
+
+      private
+      def compile_find_params(
+        bank_accounts: false,
+        capital_call_events: false,
+        dates: false,
+        docset: false,
+        documents: false,
+        expenses: false,
+        profile: false,
+        subscriptions: false
+      )
+        include_queries = []
+        include_queries << 'bank_accounts' if bank_accounts
+        include_queries << 'capital_call_events' if capital_call_events
+        include_queries << 'dates' if dates
+        include_queries << 'docset' if docset
+        include_queries << 'documents' if documents
+        include_queries << 'expenses' if expenses
+        include_queries << 'profile' if profile
+        include_queries << 'subscriptions' if subscriptions
+
+        return {} if include_queries.size.zero?
+
+        { include: include_queries.join(',') }
       end
     end
   end

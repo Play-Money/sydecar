@@ -8,7 +8,7 @@ module Sydecar
     class << self
       # @param [UUID] id
       def find(id:)
-        Connection.instance.get("#{URL}/#{id}", { include: 'fund' })
+        Connection.instance.get("#{URL}/#{id}")
       end
       # @param [UUID] id
       def delete(id:)

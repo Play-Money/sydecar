@@ -8,7 +8,7 @@ RSpec.describe Sydecar::Document do
   let(:id) { 1 }
 
   it 'calls find' do
-    url = "#{Sydecar::Connection.base_url}#{Sydecar::Document::URL}/#{id}?include=fund"
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Document::URL}/#{id}"
     stub_request(:get, url)
       .with(headers: headers)
       .to_return(body: body, status: 200)
