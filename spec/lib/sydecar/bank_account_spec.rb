@@ -11,7 +11,7 @@ RSpec.describe Sydecar::BankAccount do
       .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
 
-    subject.class.create(body: body)
+    subject.class.create(body: body, idempotency_key: 'unique')
   end
 
   it 'calls find' do

@@ -6,8 +6,8 @@ module Sydecar
     CREATE_URL = "#{URL}/create"
     class << self
       # @param [Hash] body
-      def create(body:)
-        Connection.instance.post(CREATE_URL, body)
+      def create(body:, idempotency_key:)
+        Connection.instance.post(CREATE_URL, body, { 'idempotency-key': idempotency_key })
       end
 
       # @param [UUID] id
