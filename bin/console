@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "bundler/setup"
+require 'bundler/setup'
+Bundler.require(:default,:development)
+require 'active_support'
 require "sydecar"
 
 # You can add fixtures and/or initialization code here to make experimenting

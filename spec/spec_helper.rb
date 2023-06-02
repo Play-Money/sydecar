@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'byebug'
+require 'bundler/setup'
+Bundler.require(:default,:development)
 require 'webmock/rspec'
-require 'awesome_print'
-
+require 'active_support'
 require "sydecar"
 
 RSpec.configure do |config|

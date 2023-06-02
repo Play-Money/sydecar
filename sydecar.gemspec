@@ -40,6 +40,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'webmock', '~> 3.18'
   spec.add_development_dependency 'activesupport', '~> 7.0'
   spec.add_development_dependency 'faraday-logging-color_formatter', '~> 0.2.0'
+  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'byebug', '~> 11.1'
+  spec.add_development_dependency 'awesome_print', '~> 1.9'
 
   spec.add_dependency 'faraday', '~> 2.7'
   spec.add_dependency 'json', '~> 2.6'
