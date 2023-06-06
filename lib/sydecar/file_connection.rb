@@ -19,10 +19,8 @@ module Sydecar
         ) do |f|
           f.request :multipart
           f.response :json
-          if ENV['RAILS_ENV'] == 'development' || !ENV['RAILS_ENV']
-            f.response :logger,
-                       ActiveSupport::Logger.new($stdout),
-                       formatter: Faraday::Logging::ColorFormatter
+          if %w[development test].include?(ENV['RAILS_ENV']) || !ENV['RAILS_ENV']
+            f.response :logger
           end
         end
 
