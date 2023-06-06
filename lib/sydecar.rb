@@ -2,9 +2,7 @@
 
 # TODO: find a way to load all dependencies automatically for any ENV
 require 'faraday'
-require 'active_support'
 require 'faraday/multipart'
-require 'faraday/logging/color_formatter'
 require 'uri'
 
 require_relative "sydecar/version"

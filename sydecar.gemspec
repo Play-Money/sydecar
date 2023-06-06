@@ -38,8 +38,6 @@ Gem::Specification.new do |spec|
   # guide at: https://bundler.io/guides/creating_gem.html
 
   spec.add_development_dependency 'webmock', '~> 3.18'
-  spec.add_development_dependency 'activesupport', '~> 7.0'
-  spec.add_development_dependency 'faraday-logging-color_formatter', '~> 0.2.0'
 
   spec.add_dependency 'faraday', '~> 2.7'
   spec.add_dependency 'json', '~> 2.6'
