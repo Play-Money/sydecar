@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-Bundler.require(:default,:development)
+Bundler.require(:default, :development)
 require 'webmock/rspec'
-require 'active_support'
-require "sydecar"
+require 'faraday'
+require 'sydecar'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
