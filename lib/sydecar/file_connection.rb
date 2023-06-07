@@ -19,7 +19,7 @@ module Sydecar
         ) do |f|
           f.request :multipart
           f.response :json
-          if %w[development test].include?(ENV['RAILS_ENV']) || !ENV['RAILS_ENV']
+          if %w[development].include?(ENV['RAILS_ENV'])
             f.response :logger
           end
         end
