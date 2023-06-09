@@ -7,21 +7,9 @@ module Sydecar
 
       def instance
         super
-
         return @@instance if @@instance
 
-        @@instance = Faraday.new(
-          url: base_url,
-          headers: headers
-        ) do |f|
-          f.request :json
-          f.response :json
-          if %w[development].include?(ENV['RAILS_ENV'])
-            f.response :logger
-          end
-        end
-
-        @@instance
+        @@instance = create_instance(headers, base_url, env, format_of_request: :json)
       end
     end
 
@@ -31,6 +19,5 @@ module Sydecar
 
     def initialize
     end
-
   end
 end
