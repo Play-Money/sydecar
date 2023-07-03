@@ -97,9 +97,9 @@ module Sydecar
         "/v1/spvs/#{id}/request_approval"
       end
 
-      def request_approval(id:, body:, idempotency_key:)
+      def request_approval(id:, body:)
         url = request_approval_url(id: id)
-        Connection.instance.post(url, body, { 'idempotency-key': idempotency_key })
+        Connection.instance.post(url, body)
       end
 
       def request_bank_account_url(id:)
