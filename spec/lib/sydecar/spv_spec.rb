@@ -90,7 +90,7 @@ RSpec.describe Sydecar::Spv do
       .with(headers: headers)
       .to_return(body: body, status: 200)
 
-    subject.class.request_approval(id: spv_id, body: body, idempotency_key: 'unique-key')
+    subject.class.request_approval(id: spv_id, body: body)
   end
 
   it 'calls request_bank_account' do
