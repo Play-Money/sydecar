@@ -120,4 +120,13 @@ RSpec.describe Sydecar::Subscription do
 
     subject.class.refund(id: id, body: {}, idempotency_key: 'unique')
   end
+
+  it 'calls finalize' do
+    url = "#{Sydecar::Connection.base_url}#{Sydecar::Subscription::URL}/#{id}/finalize"
+    stub_request(:post, url)
+      .with(headers: headers, body: body)
+      .to_return(body: body, status: 201)
+
+    subject.class.finalize(subscription_id: id, body: body)
+  end
 end
