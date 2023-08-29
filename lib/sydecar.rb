@@ -20,6 +20,7 @@ require_relative "sydecar/vendor"
 require_relative "sydecar/expense"
 require_relative "sydecar/subscription"
 require_relative "sydecar/document"
+require_relative "sydecar/plaid"
 
 module Sydecar
   class TokenNotSetError < StandardError; end
