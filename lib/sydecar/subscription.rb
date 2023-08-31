@@ -151,8 +151,9 @@ module Sydecar
 
       # @param
       # 'id' [String] id of subscriber
-      # "document_signer": { "name": [String],
-      #                      "title": [String] }
+      # @param [Hash]
+      # body argument expects to have the following keys:
+      # [Hash]  document_signer: { "name": [String],  "title": [String] }
       #   "name"  The name of the signer.
       #   "title"  The title of the signer as relates to the entity it represents.
       #
