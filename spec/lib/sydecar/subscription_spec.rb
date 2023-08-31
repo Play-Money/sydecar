@@ -127,6 +127,6 @@ RSpec.describe Sydecar::Subscription do
       .with(headers: headers, body: body)
       .to_return(body: body, status: 201)
 
-    subject.class.finalize(subscription_id: id, body: body)
+    subject.class.finalize(id: id, body: body)
   end
 end

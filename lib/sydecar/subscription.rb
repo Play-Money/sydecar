@@ -145,20 +145,20 @@ module Sydecar
         Connection.instance.post("#{URL}#{query}", body)
       end
 
-      def finalize_url(subscription_id)
-        "#{URL}/#{subscription_id}/finalize"
+      def url(id)
+        "#{URL}/#{id}/finalize"
       end
 
       # @param
-      # 'subscription_id' [String] id of subscriber
+      # 'id' [String] id of subscriber
       # "document_signer": { "name": [String],
       #                      "title": [String] }
       #   "name"  The name of the signer.
       #   "title"  The title of the signer as relates to the entity it represents.
       #
       # Finalize a subscription to be ready to create a bank account.
-      def finalize(subscription_id:, body:)
-        url = finalize_url subscription_id
+      def finalize(id:, body:)
+        url = url id
         Connection.instance.post(url, body)
       end
     end
