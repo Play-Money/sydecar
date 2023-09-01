@@ -4,7 +4,7 @@ module Sydecar
     PLAID_INSTITUTIONS_URL = 'v1/plaid/plaid_institutions'
     CREATE_PLAID_BANK_ACCOUNT_URL = 'v1/plaid/create_plaid_bank_account'
     class << self
-      def reset_plaid_login_url(bank_account_id)
+      def reset_plaid_login_url(bank_account_id:)
         "v1/plaid/#{bank_account_id}/reset_plaid_login"
       end
       def create_bank_account_url
@@ -79,7 +79,7 @@ module Sydecar
       #   }
       # }
       # @return See example data [Hash] Responses : > '200'
-      def fetch_plaid_institutions(query = {})
+      def fetch_plaid_institutions(query: {})
         Connection.instance.get(PLAID_INSTITUTIONS_URL, query)
       end
 
@@ -157,7 +157,7 @@ module Sydecar
       #
       # @return See example data [Hash] Responses : > '200'
       def reset_plaid_login(bank_account_id:)
-        Connection.instance.post(reset_plaid_login_url(bank_account_id), body:{})
+        Connection.instance.post(reset_plaid_login_url(bank_account_id: bank_account_id), body:{})
       end
     end
   end

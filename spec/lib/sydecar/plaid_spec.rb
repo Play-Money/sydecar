@@ -26,7 +26,7 @@ RSpec.describe Sydecar::Plaid do
       .with(body: {}, headers: headers)
       .to_return(body: body, status: 200)
 
-    subject.class.fetch_plaid_institutions(body: {})
+    subject.class.fetch_plaid_institutions()
   end
 
   it 'calls create_plaid_account' do
@@ -38,7 +38,7 @@ RSpec.describe Sydecar::Plaid do
   end
 
   it 'calls reset_plaid_login' do
-    stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::Plaid::reset_plaid_login_url('bank_account_id')}")
+    stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::Plaid::reset_plaid_login_url(bank_account_id: 'bank_account_id')}")
       .with(headers: headers)
       .to_return(body: body, status: 200)
 
