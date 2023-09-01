@@ -1,10 +1,12 @@
 module Sydecar
   class Plaid
+    CREATE_LINK_TOKEN_URL = 'v1/plaid/create_link_token'
+    PLAID_INSTITUTIONS_URL = 'v1/plaid/plaid_institutions'
+    CREATE_PLAID_BANK_ACCOUNT_URL = 'v1/plaid/create_plaid_bank_account'
     class << self
-      CREATE_LINK_TOKEN_URL = 'v1/plaid/create_link_token'
-      PLAID_INSTITUTIONS_URL = 'v1/plaid/plaid_institutions'
-      CREATE_PLAID_BANK_ACCOUNT_URL = 'v1/plaid/create_plaid_bank_account'
-      RESET_PLAID_LOGIN_URL = 'v1/plaid/{bank_account_id}/reset_plaid_login'
+      def reset_plaid_login_url(bank_account_id)
+        "v1/plaid/#{bank_account_id}/reset_plaid_login"
+      end
       def create_bank_account_url
         '/v1/plaid/link_plaid_bank_account'
       end
@@ -121,7 +123,7 @@ module Sydecar
       end
 
       # This method reset a Plaid account's login (Sandbox only)
-      # @param [Hash] body
+      # @param
       #   - 'bank_account_id': [String] (required)
       #     Resets the Plaid account's login information forcing the user to reauthenticate. As part of the reset, the 'plaid_consent_expiration_time' attribute is set to yesterday's date. When plaid link is called in update mode the 'plaid_consent_expiration_time' gets set back to the item's value. This route is only available in sandbox.
       #     See https://api-docs.sydecar.io/api/#tag/Plaid/operation/resetPlaidLogin
@@ -154,8 +156,8 @@ module Sydecar
       # }
       #
       # @return See example data [Hash] Responses : > '200'
-      def reset_plaid_login(body:)
-        Connection.instance.post(RESET_PLAID_LOGIN_URL, body)
+      def reset_plaid_login(bank_account_id:)
+        Connection.instance.post(reset_plaid_login_url(bank_account_id), body:{})
       end
     end
   end
