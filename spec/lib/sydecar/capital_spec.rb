@@ -29,4 +29,12 @@ RSpec.describe Sydecar::Capital do
 
 		subject.class.fetch_SPV_capital_call(capital_call_event_id: capital_call_event_id, query: { include: 'capital_calls' })
 	end
+
+	it 'calls method update_SPV_capital_call' do
+		stub_request(:patch, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
+			.with( body: body, headers: headers)
+			.to_return(body: body, status: 201)
+
+		subject.class.update_SPV_capital_call(capital_call_event_id: capital_call_event_id, body: body)
+	end
 end

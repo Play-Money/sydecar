@@ -142,13 +142,17 @@ module Sydecar
 			  Connection.instance.get("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}#{query}")
 		  end
 
-		  # Fetch an SPV capital call event by id
+		  # Update an SPV capital call event
 		  # @param
 		  #   PATH PARAMETERS
 		  #   - 'capital_call_event_id' [String] (required)
 		  #   REQUEST BODY SCHEMA: application/json
 		  #   - 'percentage' [Number] [ 0 .. 100 ]
 		  #   - 'memo'       [String]
+		  #
+		  # Update an SPV capital call event. You can only update a capital call event before subscription captial calls
+		  # have been made (e.g. if the capital call event has been created and the SPV has no subscriptions created yet).
+		  #
 		  # @EXAMPLE
 		  #   Response samples:
 		  #   {
@@ -159,8 +163,13 @@ module Sydecar
 		  #   "memo": "string",
 		  #   "percentage": 0
 		  #   }
-		  # @return [Hash] see upper
+		  # More detail see on the
+		  # https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/updateCapitalCallEvent
+		  # @return [Hash] see example
 		  #   Response: > '200'
+		  def update_SPV_capital_call(capital_call_event_id:, body: {})
+			  Connection.instance.patch("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}", body)
+		  end
 
 	  end
   end
