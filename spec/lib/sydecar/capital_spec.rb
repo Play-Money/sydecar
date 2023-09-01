@@ -37,4 +37,12 @@ RSpec.describe Sydecar::Capital do
 
 		subject.class.update_SPV_capital_call(capital_call_event_id: capital_call_event_id, body: body)
 	end
+
+	it 'calls method delete_SPV_capital_call' do
+		stub_request(:delete, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
+			.with( headers: headers)
+			.to_return(body: body, status: 201)
+
+		subject.class.delete_SPV_capital_call(capital_call_event_id: capital_call_event_id)
+	end
 end

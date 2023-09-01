@@ -171,6 +171,32 @@ module Sydecar
 			  Connection.instance.patch("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}", body)
 		  end
 
+		  # Delete an SPV capital call event by id
+		  # @param
+		  #   PATH PARAMETERS
+		  #   - 'capital_call_event_id' [String] (required)
+		  #
+		  # Delete an SPV capital call event. You can only delete a capital call event before subscription captial calls
+		  # have been made (e.g. if the capital call event has been created but no subscriptions have been created for the SPV so far).
+		  #
+		  # @EXAMPLE
+		  #   Response samples:
+		  #   {
+		  #   "id": "string",
+		  #   "created_at": "2019-08-24T14:15:22Z",
+		  #   "updated_at": "2019-08-24T14:15:22Z",
+		  #   "spv_id": "string",
+		  #   "memo": "string",
+		  #   "percentage": 0
+		  # }
+		  # More detail see on the
+		  # https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/removeCapitalCallEvent
+		  # @return [Hash] see example
+		  #   Response: > '200'
+		  def delete_SPV_capital_call(capital_call_event_id:)
+			  Connection.instance.delete("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
+		  end
+
 	  end
   end
 end
