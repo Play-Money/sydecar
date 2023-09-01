@@ -197,6 +197,32 @@ module Sydecar
 			  Connection.instance.delete("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
 		  end
 
+		  # Get the capital call needed for a disbursement
+		  # @param
+		  #   QUERY PARAMETERS
+		  #   - 'use_spv_allocation' [boolean] (optional)
+		  #   REQUEST BODY SCHEMA: application/json
+		  #   - 'spv_id' [String]            (required)
+		  #   - 'disbursement' [Number >=0 ] (required)
+		  #
+		  # Returns the capital call percentage needed for sufficient funds for a given disbursement. Uses reserved
+		  # subscription amounts, unless 'use_spv_allocation' is passed as 'true'.
+		  #
+		  # @EXAMPLE
+		  #   Response samples:
+		  #   {
+		  #   "data": {
+		  #     "capital_call_percentage": 0
+		  #   }
+		  # }
+		  # More detail see on the
+		  # https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/getCapitalCallNeededForDisbursement
+		  # @return [Hash] see example
+		  #   Response: > '200'
+		  def get_capital_call_for_disbursement(body:, query: {})
+			  query = "?#{URI.encode_www_form(query)}"
+			  Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}/capital_call_needed_for_disbursement#{query}", body)
+		  end
 	  end
   end
 end

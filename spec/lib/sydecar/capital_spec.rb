@@ -45,4 +45,12 @@ RSpec.describe Sydecar::Capital do
 
 		subject.class.delete_SPV_capital_call(capital_call_event_id: capital_call_event_id)
 	end
+
+	it 'calls method get_capital_call_for_disbursement' do
+		stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}/capital_call_needed_for_disbursement?use_spv_allocation=true")
+			.with( body: body, headers: headers)
+			.to_return(body: body, status: 201)
+
+		subject.class.get_capital_call_for_disbursement(body: body, query: { use_spv_allocation: true })
+	end
 end
