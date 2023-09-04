@@ -2,7 +2,6 @@
 
 module Sydecar
   class Capital
-
 	  CAPITAL_CALL_EVENTS_URL = 'v1/capital_call_events'
 	  class << self
 		  # Fetch all capital call events for an SPV
