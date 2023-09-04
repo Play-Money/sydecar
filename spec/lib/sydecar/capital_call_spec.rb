@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Sydecar::Capital do
+RSpec.describe Sydecar::CapitalCall do
 	let!(:headers) { Sydecar::Connection.headers }
 	let!(:body) { {}.to_json }
 	let!(:capital_call_event_id) { '1' }
 
 	it 'calls method fetch_capital_calls_for_SPV' do
-		stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}")
+		stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::CapitalCall::CAPITAL_CALL_EVENTS_URL}")
 			.with( body: body, headers: headers)
 			.to_return(body: body, status: 200)
 
@@ -15,7 +15,7 @@ RSpec.describe Sydecar::Capital do
 	end
 
 	it 'calls method create_SPV_capital_call' do
-		stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}/create")
+		stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::CapitalCall::CAPITAL_CALL_EVENTS_URL}/create")
 			.with( body: body, headers: headers)
 			.to_return(body: body, status: 201)
 
@@ -23,7 +23,7 @@ RSpec.describe Sydecar::Capital do
 	end
 
 	it 'calls method fetch_SPV_capital_call' do
-		stub_request(:get, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}?include=capital_calls")
+		stub_request(:get, "#{Sydecar::Connection.base_url}/#{Sydecar::CapitalCall::CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}?include=capital_calls")
 			.with( headers: headers)
 			.to_return(body: body, status: 200)
 
@@ -31,7 +31,7 @@ RSpec.describe Sydecar::Capital do
 	end
 
 	it 'calls method update_SPV_capital_call' do
-		stub_request(:patch, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
+		stub_request(:patch, "#{Sydecar::Connection.base_url}/#{Sydecar::CapitalCall::CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
 			.with( body: body, headers: headers)
 			.to_return(body: body, status: 201)
 
@@ -39,7 +39,7 @@ RSpec.describe Sydecar::Capital do
 	end
 
 	it 'calls method delete_SPV_capital_call' do
-		stub_request(:delete, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
+		stub_request(:delete, "#{Sydecar::Connection.base_url}/#{Sydecar::CapitalCall::CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
 			.with( headers: headers)
 			.to_return(body: body, status: 201)
 
@@ -47,7 +47,7 @@ RSpec.describe Sydecar::Capital do
 	end
 
 	it 'calls method get_capital_call_for_disbursement' do
-		stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::Capital::CAPITAL_CALL_EVENTS_URL}/capital_call_needed_for_disbursement?use_spv_allocation=true")
+		stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::CapitalCall::CAPITAL_CALL_EVENTS_URL}/capital_call_needed_for_disbursement?use_spv_allocation=true")
 			.with( body: body, headers: headers)
 			.to_return(body: body, status: 201)
 

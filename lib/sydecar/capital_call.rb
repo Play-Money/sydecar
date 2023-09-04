@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Sydecar
-  class Capital
+  class CapitalCall
 
     CAPITAL_CALL_EVENTS_URL = 'v1/capital_call_events'
     class << self
