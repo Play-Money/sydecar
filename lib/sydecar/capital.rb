@@ -3,9 +3,9 @@
 module Sydecar
   class Capital
 
-		CAPITAL_CALL_EVENTS_URL = 'v1/capital_call_events'
-		class << self
-			# Fetch all capital call events for an SPV
+    CAPITAL_CALL_EVENTS_URL = 'v1/capital_call_events'
+    class << self
+      # Fetch all capital call events for an SPV
   	  # @param
   	  #   Query parameters [Hash]
   	  #   - 'sort' [String] (Enum: 'asc', 'desc')
@@ -52,12 +52,11 @@ module Sydecar
 		  #
 		  # See on the https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/getAllCapitalCallEvents
   	  def fetch_capital_calls_for_SPV(params: {}, body: {})
-  		  query = '?'
-  		  query += URI.encode_www_form(params)
-  		  Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}#{query}", body)
+  	   query = '?'
+  	   query += URI.encode_www_form(params)
+  	   Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}#{query}", body)
 	    end
-
-		  # This method create an SPV capital call event
+  	  # This method create an SPV capital call event
 		  # @param
 		  #   HEADER PARAMETERS:
 		  #   - idempotency-key [String]
@@ -103,10 +102,9 @@ module Sydecar
 		  # https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/createOneOrMoreCapitalCallEvents
 		  # @return [Hash] Responses: > '201'
 		  def create_SPV_capital_call(body:, idempotency_key:)
-			  Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}/create", body, { 'idempotency-key': idempotency_key })
+		   Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}/create", body, { 'idempotency-key': idempotency_key })
 		  end
-
-		  # Fetch an SPV capital call event by id
+  	  # Fetch an SPV capital call event by id
 		  # @param
 		  #   PATH PARAMETERS
 		  #   - 'capital_call_event_id' [String] (required)
@@ -138,11 +136,10 @@ module Sydecar
 		  # @return [Hash] see example
 		  #   Response: > '200'
 		  def fetch_SPV_capital_call(capital_call_event_id:, query: {})
-			  query = "?#{URI.encode_www_form(query)}"
-			  Connection.instance.get("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}#{query}")
+		   query = "?#{URI.encode_www_form(query)}"
+		   Connection.instance.get("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}#{query}")
 		  end
-
-		  # Update an SPV capital call event
+  	  # Update an SPV capital call event
 		  # @param
 		  #   PATH PARAMETERS
 		  #   - 'capital_call_event_id' [String] (required)
@@ -168,10 +165,9 @@ module Sydecar
 		  # @return [Hash] see example
 		  #   Response: > '200'
 		  def update_SPV_capital_call(capital_call_event_id:, body: {})
-			  Connection.instance.patch("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}", body)
+		   Connection.instance.patch("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}", body)
 		  end
-
-		  # Delete an SPV capital call event by id
+  	  # Delete an SPV capital call event by id
 		  # @param
 		  #   PATH PARAMETERS
 		  #   - 'capital_call_event_id' [String] (required)
@@ -194,10 +190,9 @@ module Sydecar
 		  # @return [Hash] see example
 		  #   Response: > '200'
 		  def delete_SPV_capital_call(capital_call_event_id:)
-			  Connection.instance.delete("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
+		   Connection.instance.delete("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
 		  end
-
-		  # Get the capital call needed for a disbursement
+  	  # Get the capital call needed for a disbursement
 		  # @param
 		  #   QUERY PARAMETERS
 		  #   - 'use_spv_allocation' [boolean] (optional)
@@ -220,8 +215,8 @@ module Sydecar
 		  # @return [Hash] see example
 		  #   Response: > '200'
 		  def get_capital_call_for_disbursement(body:, query: {})
-			  query = "?#{URI.encode_www_form(query)}"
-			  Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}/capital_call_needed_for_disbursement#{query}", body)
+		   query = "?#{URI.encode_www_form(query)}"
+		   Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}/capital_call_needed_for_disbursement#{query}", body)
 		  end
 	  end
   end
