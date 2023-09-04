@@ -55,7 +55,8 @@ module Sydecar
      	  query = '?'
      	  query += URI.encode_www_form(params)
      	  Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}#{query}", body)
-       end          # This method create an SPV capital call event
+       end
+      # This method create an SPV capital call event
       # @param
       #   HEADER PARAMETERS:
       #   - idempotency-key [String]
@@ -102,7 +103,8 @@ module Sydecar
       # @return [Hash] Responses: > '201'
       def create_SPV_capital_call(body:, idempotency_key:)
     	  Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}/create", body, { 'idempotency-key': idempotency_key })
-      end          # Fetch an SPV capital call event by id
+      end
+      # Fetch an SPV capital call event by id
       # @param
       #   PATH PARAMETERS
       #   - 'capital_call_event_id' [String] (required)
@@ -136,7 +138,8 @@ module Sydecar
       def fetch_SPV_capital_call(capital_call_event_id:, query: {})
     	  query = "?#{URI.encode_www_form(query)}"
     	  Connection.instance.get("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}#{query}")
-      end          # Update an SPV capital call event
+      end
+      # Update an SPV capital call event
       # @param
       #   PATH PARAMETERS
       #   - 'capital_call_event_id' [String] (required)
@@ -163,7 +166,8 @@ module Sydecar
       #   Response: > '200'
       def update_SPV_capital_call(capital_call_event_id:, body: {})
     	  Connection.instance.patch("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}", body)
-      end          # Delete an SPV capital call event by id
+      end
+      # Delete an SPV capital call event by id
       # @param
       #   PATH PARAMETERS
       #   - 'capital_call_event_id' [String] (required)
@@ -187,7 +191,8 @@ module Sydecar
       #   Response: > '200'
       def delete_SPV_capital_call(capital_call_event_id:)
     	  Connection.instance.delete("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
-      end          # Get the capital call needed for a disbursement
+      end
+      # Get the capital call needed for a disbursement
       # @param
       #   QUERY PARAMETERS
       #   - 'use_spv_allocation' [boolean] (optional)
