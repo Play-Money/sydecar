@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Sydecar
-	URL = 'v1/configure/webhooks/'
   class WebhookCalls
+	  URL = '/v1/configure/webhooks'
     class << self
       # The method create a webhook callback URL
       # @param
@@ -34,8 +34,8 @@ module Sydecar
       # @return [Hash] - Responses: > '201'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/createWebhook
-      def create(body:, idempotency_key:)
-      	Connection.instance.post("#{URL}create", body, { 'idempotency-key': idempotency_key })
+      def register_webhook_callback(body:, idempotency_key:)
+      	Connection.instance.post("#{URL}/create", body, { 'idempotency-key': idempotency_key })
       end
 
       # This method fetch all webhooks
@@ -70,9 +70,9 @@ module Sydecar
       # @return See example RESPONSES: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/getAllWebhooks
-      def fetch_all_webhooks(query:)
-      	query = URI.encode_www_form(query)
-      	Connection.instance.post("#{URL}?#{query}")
+      def fetch_all_webhooks(query: {})
+	      query = query.empty? ? '' : "?#{URI.encode_www_form(query)}"
+	      Connection.instance.post("#{URL}#{query}")
       end
 
       # This method Fetch webhook information by id
@@ -90,11 +90,11 @@ module Sydecar
       #   "token": "string",
       #   "disabled": true
       # }
-      # #return [Hash] Responses: > '200'
+      # return [Hash] Responses: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/getWebhook
       def fetch_webhook(webhook_id:)
-	      Connection.instance.get("#{URL}#{webhook_id}")
+	      Connection.instance.get("#{URL}/#{webhook_id}")
       end
 
       # This method Update a webhook
@@ -122,8 +122,8 @@ module Sydecar
       # @return [Hash] - Responses: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/updateWebhook
-      def update_webhook(webhook_id:, body:)
-	      Connection.instance.patch("#{URL}#{webhook_id}", body)
+      def update(webhook_id:, body:)
+	      Connection.instance.patch("#{URL}/#{webhook_id}", body)
       end
 
       # This method Fetch latest webhook events
@@ -163,7 +163,7 @@ module Sydecar
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/getAllWebhookEvents
       def fetch_latest_webhook_events(webhook_id:, query: {})
 	      query = URI.encode_www_form(query)
-	      Connection.instance.post("#{URL}?#{query}/events")
+	      Connection.instance.post("#{URL}/#{webhook_id}/events?#{query}")
       end
 
       # This method Resend webhook event
