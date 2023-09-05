@@ -9,11 +9,11 @@ module Sydecar
       #   HEADER PARAMETERS:
       #     - idempotency-key [String] - Idempotency key header for sensitive operations
       #   REQUEST BODY SCHEMA: application/json
-      #     - url [String]       - The callback url associated the the webhook                     (required)
-      #     - label [String]     - A label to easily identify your web hook                        (required)
+      #     - url [String]       - The callback url associated the the webhook (required)
+      #     - label [String]     - A label to easily identify your web hook (required)
       #     - token [String]     - For security reasons every webhook is associated with a token.  (required)
       #                             This token will be used to sign the incoming payloads.
-      #     - disabled [boolean] - Enable / disable your web hook.                             (required)
+      #     - disabled [boolean] - Enable / disable your web hook. (required)
       #
       # @note
       #   Set a webhook callback URL. You can provide any URL for Sydecar webhook callbacks to land.
@@ -103,11 +103,11 @@ module Sydecar
       #   PATH PARAMETERS
       #   - webhook_id [String] (required)
       #   REQUEST BODY SCHEMA: application/json
-      #     - url [String]       - The callback url associated the the webhook                     (required)
-      #     - label [String]     - A label to easily identify your web hook                        (required)
+      #     - url [String]       - The callback url associated the the webhook (required)
+      #     - label [String]     - A label to easily identify your web hook    (required)
       #     - token [String]     - For security reasons every webhook is associated with a token.  (required)
       #                             This token will be used to sign the incoming payloads.
-      #     - disabled [boolean] - Enable / disable your web hook.                             (required)
+      #     - disabled [boolean] - Enable / disable your web hook. (required)
       # @example
       #   Response samples:
       #   {
