@@ -189,6 +189,6 @@ module Sydecar
       def resend_webhook_event(event_id:)
 	      Connection.instance.post("#{URL}/event/#{event_id}")
       end
-		end
-	end
+    end
+  end
 end
