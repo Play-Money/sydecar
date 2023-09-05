@@ -6,13 +6,13 @@ RSpec.describe Sydecar::WebhookCalls do
   let!(:body) { { "url": "string", "label": "string", "token": "string", "disabled": true }.to_json }
   let!(:webhook_id) { '1' }
 
-	it 'calls register_webhook_callback' do
+  it 'calls register_webhook_callback' do
     stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/create")
       .with(body: body, headers: headers)
       .to_return(body: body, status: 201)
 
     subject.class.register_webhook_callback(body: body, idempotency_key: 'unique')
-	end
+  end
 
   it 'calls fetch_all_webhooks' do
     stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}")
@@ -20,23 +20,23 @@ RSpec.describe Sydecar::WebhookCalls do
       .to_return(body: body, status: 200)
 
     subject.class.fetch_all_webhooks
-	end
+  end
 
-	it 'calls update_webhook' do
+  it 'calls update_webhook' do
     stub_request(:patch, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}")
       .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
 
     subject.class.update_webhook(body: body, webhook_id: webhook_id)
-	end
+  end
 
-	it 'calls fetch_latest_webhook_events' do
-		stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}/events")
-			.with(headers: headers, query: {})
-			.to_return(body: body, status: 200)
+  it 'calls fetch_latest_webhook_events' do
+    stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}/events")
+      .with(headers: headers, query: {})
+      .to_return(body: body, status: 200)
 
-		subject.class.fetch_latest_webhook_events(webhook_id: webhook_id)
-	end
+    subject.class.fetch_latest_webhook_events(webhook_id: webhook_id)
+  end
 
   it 'calls fetch_webhook' do
     stub_request(:get, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}")
