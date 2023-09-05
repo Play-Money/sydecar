@@ -34,7 +34,7 @@ module Sydecar
       # @return [Hash] - Responses: > '201'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/createWebhook
-      def register_webhook_callback(body:, idempotency_key:)
+      def create(body:, idempotency_key:)
       	Connection.instance.post("#{URL}/create", body, { 'idempotency-key': idempotency_key })
       end
 
@@ -70,7 +70,7 @@ module Sydecar
       # @return See example RESPONSES: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/getAllWebhooks
-      def fetch_all_webhooks(query: {})
+      def find_all(query: {})
         query = "?#{URI.encode_www_form(query)}"
         Connection.instance.post("#{URL}#{query}")
       end
@@ -93,8 +93,8 @@ module Sydecar
       # return [Hash] Responses: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/getWebhook
-      def fetch_webhook(webhook_id:)
-        Connection.instance.get("#{URL}/#{webhook_id}")
+      def find(id:)
+        Connection.instance.get("#{URL}/#{id}")
       end
 
       # This method Update a webhook
