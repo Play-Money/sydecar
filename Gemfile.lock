@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sydecar (0.1.6)
+    sydecar (0.1.7)
       faraday (~> 2.7)
       faraday-multipart (~> 1.0)
       json (~> 2.6)

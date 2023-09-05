@@ -94,6 +94,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/Play-Money/sydecar.
 
+## How to Publish Changes
+1. gem build sydecar.gemspec
+2. gem push sydecar-x.x.x.gem
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

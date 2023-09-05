@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Ruby bindings for the Sydecar API."
   spec.description = "Ruby bindings for the Sydecar API."
-  spec.homepage = "https://github.com/Play-Money/sydecar."
+  spec.homepage = "https://github.com/Play-Money/sydecar"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
