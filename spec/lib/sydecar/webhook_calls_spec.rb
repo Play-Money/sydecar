@@ -22,12 +22,12 @@ RSpec.describe Sydecar::WebhookCalls do
     subject.class.find_all
   end
 
-  it 'calls update_webhook' do
+  it 'calls update' do
     stub_request(:patch, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}")
       .with(body: body, headers: headers)
       .to_return(body: body, status: 200)
 
-    subject.class.update_webhook(body: body, webhook_id: webhook_id)
+    subject.class.update(body: body, id: webhook_id)
   end
 
   it 'calls fetch_latest_webhook_events' do
@@ -35,7 +35,7 @@ RSpec.describe Sydecar::WebhookCalls do
       .with(headers: headers, query: {})
       .to_return(body: body, status: 200)
 
-    subject.class.fetch_latest_webhook_events(webhook_id: webhook_id)
+    subject.class.find_latest_events(id: webhook_id)
   end
 
   it 'calls find' do
@@ -45,27 +45,12 @@ RSpec.describe Sydecar::WebhookCalls do
     subject.class.find(id: webhook_id)
   end
 
-  it 'calls update_webhook' do
-    stub_request(:patch, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}")
-      .with(body: body, headers: headers)
-      .to_return(body: body, status: 200)
-
-    subject.class.update_webhook(body: body, webhook_id: webhook_id)
-  end
-
-  it 'calls fetch_latest_webhook_events' do
-    stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}/events")
-      .with(headers: headers, query: {})
-      .to_return(body: body, status: 200)
-    subject.class.fetch_latest_webhook_events(webhook_id: webhook_id)
-  end
-
-  it 'calls resend_webhook_event' do
+  it 'calls resend_event' do
     event_id = 1
     stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/event/#{event_id}")
       .with(headers: headers, query: {})
       .to_return(body: body, status: 200)
 
-    subject.class.resend_webhook_event(event_id: event_id)
+    subject.class.resend_event(event_id: event_id)
 	end
 end

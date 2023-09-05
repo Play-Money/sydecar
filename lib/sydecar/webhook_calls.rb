@@ -122,8 +122,8 @@ module Sydecar
       # @return [Hash] - Responses: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/updateWebhook
-      def update_webhook(webhook_id:, body:)
-        Connection.instance.patch("#{URL}/#{webhook_id}", body)
+      def update(id:, body:)
+        Connection.instance.patch("#{URL}/#{id}", body)
       end
 
       # This method Fetch latest webhook events
@@ -161,9 +161,9 @@ module Sydecar
       # @return See example RESPONSES: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/getAllWebhookEvents
-      def fetch_latest_webhook_events(webhook_id:, query: {})
+      def find_latest_events(id:, query: {})
         query = URI.encode_www_form(query)
-        Connection.instance.post("#{URL}/#{webhook_id}/events?#{query}")
+        Connection.instance.post("#{URL}/#{id}/events?#{query}")
       end
 
       # This method Resend webhook event
@@ -186,7 +186,7 @@ module Sydecar
       # @return [Hash] Responses > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/replayWebhookEvent
-      def resend_webhook_event(event_id:)
+      def resend_event(event_id:)
         Connection.instance.post("#{URL}/event/#{event_id}")
       end
     end
