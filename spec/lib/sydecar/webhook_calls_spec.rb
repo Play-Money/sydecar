@@ -52,5 +52,5 @@ RSpec.describe Sydecar::WebhookCalls do
       .to_return(body: body, status: 200)
 
     subject.class.resend_event(event_id: event_id)
-	end
+  end
 end
