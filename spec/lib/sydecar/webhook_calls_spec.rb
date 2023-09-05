@@ -7,6 +7,7 @@ RSpec.describe Sydecar::WebhookCalls do
 	                "label": "string",
 	                "token": "string",
 	                "disabled": true}.to_json }
+	let!(:webhook_id) { '1'}
 
 	it 'calls register_webhook_callback' do
 		stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/create")
@@ -17,34 +18,43 @@ RSpec.describe Sydecar::WebhookCalls do
 	end
 
 	it 'calls fetch_all_webhooks' do
-		stub_request(:get, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}?")
-			.with(query: {}, headers: headers)
+		stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}")
+			.with(headers: headers)
 			.to_return(body: body, status: 200)
 
 		subject.class.fetch_all_webhooks
 	end
-	#
-	# it 'calls fetch_plaid_institutions' do
-	# 	stub_request(:get, "#{Sydecar::Connection.base_url}/#{Sydecar::Plaid::PLAID_INSTITUTIONS_URL}")
-	# 		.with(body: {}, headers: headers)
-	# 		.to_return(body: body, status: 200)
-	#
-	# 	subject.class.fetch_plaid_institutions()
-	# end
-	#
-	# it 'calls create_plaid_account' do
-	# 	stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::Plaid::CREATE_PLAID_BANK_ACCOUNT_URL}")
-	# 		.with(body: body, headers: headers)
-	# 		.to_return(body: body, status: 201)
-	#
-	# 	subject.class.create_plaid_account(body: body)
-	# end
-	#
-	# it 'calls reset_plaid_login' do
-	# 	stub_request(:post, "#{Sydecar::Connection.base_url}/#{Sydecar::Plaid::reset_plaid_login_url(bank_account_id: 'bank_account_id')}")
-	# 		.with(headers: headers)
-	# 		.to_return(body: body, status: 200)
-	#
-	# 	subject.class.reset_plaid_login(bank_account_id: 'bank_account_id')
-	# end
+
+	it 'calls fetch_webhook' do
+		stub_request(:get, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}")
+			.with(body: {}, headers: headers)
+			.to_return(body: body, status: 200)
+
+		subject.class.fetch_webhook(webhook_id: webhook_id)
+	end
+
+	it 'calls update_webhook' do
+		stub_request(:patch, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}")
+			.with(body: body, headers: headers)
+			.to_return(body: body, status: 200)
+
+		subject.class.update_webhook(body: body, webhook_id: webhook_id)
+	end
+
+	it 'calls fetch_latest_webhook_events' do
+		stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/#{webhook_id}/events")
+			.with(headers: headers, query: {})
+			.to_return(body: body, status: 200)
+
+		subject.class.fetch_latest_webhook_events(webhook_id: webhook_id)
+	end
+
+	it 'calls resend_webhook_event' do
+		event_id = 1
+		stub_request(:post, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}/event/#{event_id}")
+			.with(headers: headers, query: {})
+			.to_return(body: body, status: 200)
+
+		subject.class.resend_webhook_event(event_id: event_id)
+	end
 end

@@ -122,7 +122,7 @@ module Sydecar
       # @return [Hash] - Responses: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/updateWebhook
-      def update(webhook_id:, body:)
+      def update_webhook(webhook_id:, body:)
 	      Connection.instance.patch("#{URL}/#{webhook_id}", body)
       end
 
