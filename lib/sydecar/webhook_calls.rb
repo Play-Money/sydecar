@@ -187,7 +187,7 @@ module Sydecar
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/replayWebhookEvent
       def resend_webhook_event(event_id:)
-	      Connection.instance.post("#{URL}/event/#{event_id}")
+        Connection.instance.post("#{URL}/event/#{event_id}")
       end
     end
   end
