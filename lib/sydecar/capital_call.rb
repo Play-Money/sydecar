@@ -51,7 +51,7 @@ module Sydecar
       # @return See example RESPONSES: > '200'
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/getAllCapitalCallEvents
-       def fetch_capital_calls_for_SPV(params: {}, body: {})
+       def fetch_capital_calls_for_spv(params: {}, body: {})
      	  query = '?'
      	  query += URI.encode_www_form(params)
      	  Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}#{query}", body)
@@ -101,7 +101,7 @@ module Sydecar
       # More detail see on the
       # https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/createOneOrMoreCapitalCallEvents
       # @return [Hash] Responses: > '201'
-      def create_SPV_capital_call(body:, idempotency_key:)
+      def create_spv_capital_call(body:, idempotency_key:)
     	  Connection.instance.post("#{CAPITAL_CALL_EVENTS_URL}/create", body, { 'idempotency-key': idempotency_key })
       end
       # Fetch an SPV capital call event by id
@@ -135,7 +135,7 @@ module Sydecar
       # }
       # @return [Hash] see example
       #   Response: > '200'
-      def fetch_SPV_capital_call(capital_call_event_id:, query: {})
+      def fetch_spv_capital_call(capital_call_event_id:, query: {})
     	  query = "?#{URI.encode_www_form(query)}"
     	  Connection.instance.get("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}#{query}")
       end
@@ -148,7 +148,7 @@ module Sydecar
       #   - 'memo'       [String]
       #
       # Update an SPV capital call event. You can only update a capital call event before subscription captial calls
-      # have been made (e.g. if the capital call event has been created and the SPV has no subscriptions created yet).
+      # have been made (e.g. if the capital call event has been created and the spv has no subscriptions created yet).
       #
       # @EXAMPLE
       #   Response samples:
@@ -164,7 +164,7 @@ module Sydecar
       # https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/updateCapitalCallEvent
       # @return [Hash] see example
       #   Response: > '200'
-      def update_SPV_capital_call(capital_call_event_id:, body: {})
+      def update_spv_capital_call(capital_call_event_id:, body: {})
     	  Connection.instance.patch("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}", body)
       end
       # Delete an SPV capital call event by id
@@ -173,7 +173,7 @@ module Sydecar
       #   - 'capital_call_event_id' [String] (required)
       #
       # Delete an SPV capital call event. You can only delete a capital call event before subscription captial calls
-      # have been made (e.g. if the capital call event has been created but no subscriptions have been created for the SPV so far).
+      # have been made (e.g. if the capital call event has been created but no subscriptions have been created for the spv so far).
       #
       # @EXAMPLE
       #   Response samples:
@@ -189,7 +189,7 @@ module Sydecar
       # https://api-docs.sydecar.io/api/#tag/Capital-Call-Management/operation/removeCapitalCallEvent
       # @return [Hash] see example
       #   Response: > '200'
-      def delete_SPV_capital_call(capital_call_event_id:)
+      def delete_spv_capital_call(capital_call_event_id:)
     	  Connection.instance.delete("#{CAPITAL_CALL_EVENTS_URL}/#{capital_call_event_id}")
       end
       # Get the capital call needed for a disbursement
