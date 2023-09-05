@@ -71,7 +71,7 @@ module Sydecar
       #
       # See on the https://api-docs.sydecar.io/api/#tag/Configuration/operation/getAllWebhooks
       def fetch_all_webhooks(query: {})
-	      query = query.empty? ? '' : "?#{URI.encode_www_form(query)}"
+	      query = "?#{URI.encode_www_form(query)}"
 	      Connection.instance.post("#{URL}#{query}")
       end
 

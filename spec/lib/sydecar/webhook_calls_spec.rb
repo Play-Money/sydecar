@@ -17,11 +17,11 @@ RSpec.describe Sydecar::WebhookCalls do
 	end
 
 	it 'calls fetch_all_webhooks' do
-		stub_request(:get, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}")
-			.with(query: {} , headers: headers)
+		stub_request(:get, "#{Sydecar::Connection.base_url}#{Sydecar::WebhookCalls::URL}?")
+			.with(query: {}, headers: headers)
 			.to_return(body: body, status: 200)
 
-		subject.class.fetch_all_webhooks(query: {})
+		subject.class.fetch_all_webhooks
 	end
 	#
 	# it 'calls fetch_plaid_institutions' do
